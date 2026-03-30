@@ -19,14 +19,14 @@ It is aligned with this repository's standards:
 
 - Keep scenarios in JSON files under `scenarios/`
 - Do not hardcode scenario executors/stages in test scripts
-- Execute tests through `global/scripts/run-k6.sh`
+- Execute tests through `./global/scripts/run-k6.sh <product> <test-file> --config <module>/scenarios/<config>.json`
 
 ## Workflow
 1. **Collect requirements**: test type, product/module path, and optional thresholds.
 2. **Generate scenario JSON**: select executor and shape stages/rates per test type.
 3. **Add thresholds**: include `http_req_duration` and `http_req_failed` defaults (customizable).
 4. **Save in scenarios folder**: place file in `<module>/scenarios/` with a clear name.
-5. **Provide run command**: output an execution example using `global/scripts/run-k6.sh` with `--config`.
+5. **Provide run command**: output an execution example using `./global/scripts/run-k6.sh <product> <test-file> --config <module>/scenarios/<config>.json`.
 
 ## Defaults
 - `http_req_duration`: `p(95)<1000`

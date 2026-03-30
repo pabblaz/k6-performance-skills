@@ -10,13 +10,13 @@ description: >
 # k6 Performance Tests
 
 ## Language & Naming
-- Scripts written in **JavaScript**, camelCase naming (e.g., `qcNewEvents.js`, `qcPerformanceTest.js`)
+- Scripts written in **JavaScript** and **TypeScript**, camelCase naming (e.g., `qcNewEvents.js`, `qcPerformanceTest.js`)
 - Test files located in `tests/` within the relevant module (e.g., `nlo/qc/tests/`)
 
 ## Scenarios & Options
 - **CRITICAL**: Never hardcode scenario details (`stages`, `vus`, `duration`, `executor`) in the `options` object within test scripts.
 - Define scenarios in separate **JSON files** under `scenarios/` (e.g., `scenarios/my_scenario.json`).
-- Load scenarios dynamically via the `--config` flag at execution time (e.g., `k6 run --config my_scenario.json my_test.js`).
+- Load scenarios dynamically via the `--config` flag at execution time (e.g., `./global/scripts/run-k6.sh <product> <test-file> --config <module>/scenarios/my_scenario.json`).
 - The script's `options` object should only contain non-scenario configurations like `tags` or specific test `thresholds`.
 - This ensures changing load profiles does not modify test logic.
 

@@ -18,6 +18,11 @@ Use this checklist before finalizing any skill output.
 - Do not hardcode executors, stages, vus, or duration in test scripts.
 - Use `global/scripts/run-k6.sh` as the execution entrypoint.
 
+## Frontend Test Standards
+- Follow the same frontend testing guidelines used in `nqc/frontend`.
+- Page objects must inherit from `global/frontend/base-page.ts` (`base-page.js` in compiled output), which encapsulates interaction with the `Page` object from `k6/browser`.
+- Use `global/frontend/base-browser.ts` (`base-browser.js` in compiled output) as the interface for interactions with `browser` and `contextBrowser` objects.
+
 ## Documentation
 - Include clear usage examples and expected inputs.
 - Reference provided templates/examples in each skill.

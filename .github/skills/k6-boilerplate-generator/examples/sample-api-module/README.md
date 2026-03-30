@@ -9,7 +9,8 @@
 Use the shared script:
 
 ```bash
-./global/scripts/run-k6.sh nlo health-performance.js --config .github/skills/k6-boilerplate-generator/examples/sample-api-module/scenarios/load.json
+# Example after generating/copying this module into nlo/sample-api-module/
+./global/scripts/run-k6.sh nlo health-performance.js --config nlo/sample-api-module/scenarios/load.json
 ```
 
 Set required env var before execution:

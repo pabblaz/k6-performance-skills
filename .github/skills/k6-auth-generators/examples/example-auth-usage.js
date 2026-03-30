@@ -10,6 +10,11 @@ export const options = {
 };
 
 export default function () {
+  const baseUrl = __ENV.API_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("Missing required env var: API_BASE_URL");
+  }
+
   const bearer = buildBearerAuthFromEnv({ sub: "perf-user", role: "tester" });
   const apiKeyHeaders = buildApiKeyHeaders({ headerName: "x-api-key", keyEnv: "MY_API_KEY" });
 
@@ -21,7 +26,7 @@ export default function () {
     apiKeyHeaders,
   );
 
-  const res = http.get(`${__ENV.API_BASE_URL}/health`, { headers });
+  const res = http.get(`${baseUrl}/health`, { headers });
 
   check(res, {
     "status is 200": (r) => r.status === 200,

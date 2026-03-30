@@ -18,9 +18,9 @@ services:
   # Performance Test Container (k6)
   performance-test:
     build:
-      # Build context relative to the docker-compose file location
+      # Build context and Dockerfile path are relative to this compose file location
       context: ../../../
-      dockerfile: infrastructure/example-Dockerfile
+      dockerfile: .github/skills/docker/examples/example-Dockerfile
     container_name: performance-test
     restart: "no"
     networks:

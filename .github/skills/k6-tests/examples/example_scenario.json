@@ -28,6 +28,6 @@
     "description": "Demonstrates how scenario config is fully extracted from the script",
     "expectedRequests": "~100 requests",
     "expectedDuration": "50s",
-    "documentation": "Run with: run-k6.sh --config path/to/example_scenario.json path/to/example_test.js"
+    "documentation": "Run with: ./global/scripts/run-k6.sh <product> <test-file> --config path/to/example_scenario.json"
   }
 }

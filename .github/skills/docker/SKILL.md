@@ -12,9 +12,9 @@ description: >
 
 ## Security
 - **Never run containers as root**
-- Specify a non-root user in the Dockerfile:
+- Specify a non-root user in the Dockerfile (command varies by base image):
   ```dockerfile
-  RUN useradd -m automator
+  RUN addgroup -S automator && adduser -S automator -G automator
   USER automator
   ```
 - Ensure the non-root user has the necessary permissions for required files/directories
