@@ -1,0 +1,21 @@
+{
+  "scenarios": {
+    "benchmark": {
+      "executor": "constant-arrival-rate",
+      "exec": "default",
+      "rate": 50,
+      "timeUnit": "1s",
+      "duration": "15m",
+      "preAllocatedVUs": 20,
+      "maxVUs": 400
+    }
+  },
+  "thresholds": {
+    "http_req_duration": [
+      "p(95)<800"
+    ],
+    "http_req_failed": [
+      "rate<0.05"
+    ]
+  }
+}

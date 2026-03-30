@@ -1,0 +1,54 @@
+services:
+  # Example target application service
+  my-app-container:
+    image: my-app-image:latest
+    container_name: my-app-container
+    networks:
+      - test-network
+    # Run securely as specific non-root UID/GID
+    user: "1000:1000"
+    ports:
+      - "8080:8080"
+    # Never hardcode secrets in compose, use .env files instead
+    env_file:
+      - ./env/app-vars.env
+    volumes:
+      - ../shared-data:/shared-data
+
+  # Performance Test Container (k6)
+  performance-test:
+    build:
+      # Build context relative to the docker-compose file location
+      context: ../../../
+      dockerfile: infrastructure/example-Dockerfile
+    container_name: performance-test
+    restart: "no"
+    networks:
+      - test-network
+    depends_on:
+      - my-app-container
+    env_file:
+      - ./env/k6.env
+    volumes:
+      - ../shared-data:/shared-data
+      - ../k6-results:/app/results
+    # Ensure healthchecks to verify correct boot before test starts
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    # Apply resource limits for tests to guarantee stable environment constraints
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    command: ["sh", "/app/tests/run-test.sh"]
+
+networks:
+  test-network:
+    driver: bridge
